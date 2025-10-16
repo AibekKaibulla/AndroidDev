@@ -9,7 +9,9 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 
-class NewsAdapter(private val items: MutableList<NewsCard>) : RecyclerView.Adapter<NewsAdapter.MyViewHolder>() {
+class NewsAdapter(
+    private val items: MutableList<NewsCard>,
+    private val onLikeClick: (postId: String) -> Unit) : RecyclerView.Adapter<NewsAdapter.MyViewHolder>() {
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -38,11 +40,15 @@ class NewsAdapter(private val items: MutableList<NewsCard>) : RecyclerView.Adapt
 
         holder.likeButton.text = if (item.isLiked) "Liked" else "Like"
         holder.likeButton.setOnClickListener {
-            item.isLiked = !item.isLiked
-            notifyItemChanged(position)
+            onLikeClick(item.id)
         }
     }
 
+    fun submitList(newList: List<NewsCard>) {
+        items.clear()
+        items.addAll(newList)
+        notifyDataSetChanged()
+    }
     override fun getItemCount(): Int = items.size
 
     inner class MyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
