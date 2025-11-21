@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/home_dest"
+    >
+
+
+    <fragment
+        android:id="@+id/home_dest"
+        android:label="@string/home"
+        android:name="com.example.myapplication.HomeFragment">
+
+        <action
+            android:id="@+id/action_home_dest_to_flow_step_one_dest"
+            app:destination="@id/flow_step_one_dest" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/flow_step_one_dest"
+        android:name="com.example.myapplication.FlowStepOneFragment">
+
+        <argument
+            android:name="flowStepWord"
+            app:argType="string"
+            android:defaultValue="1"/>
+    </fragment>
+</navigation>
